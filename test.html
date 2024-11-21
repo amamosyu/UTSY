@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Emoji:wght@300;700&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel=”icon” href=“favicon.ico”>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/tippy.js@6/animations/shift-toward-extreme.css">
+    <link rel="stylesheet" type="text/css" href="loading.css">
+    <title>UTSY</title>
+    <!-- Pollyfill script -->
+    <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+    <!-- Live2DCubismCore script -->
+    <script src="./Core/live2dcubismcore.js"></script>
+    <!-- Build script -->
+    <script src="./dist/bundle.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Zen Kaku Gothic Antique', sans-serif;
+        }
+
+        /* 左セクション */
+        .left {
+            width: 40%;
+            /* 左セクション4割 */
+            background: #f4f4f4;
+            padding: 10px 20px;
+            /* 縦横に余白を追加 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .left h1 {
+            letter-spacing: -0.01em;
+            font-family: 'Dela Gothic One';
+            font-size: 70px;
+            color: black;
+        }
+
+        .left nav {
+            margin-top: 10px;
+            display: flex;
+            /* 横並びに変更 */
+            gap: 10px;
+            /* ナビ間の余白 */
+            justify-content: center;
+            width: 100%;
+        }
+
+        .left nav a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            color: black;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            /* ホバー用 */
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+
+        .left nav a:hover {
+            background: #555;
+            color: white;
+        }
+
+        .left img {
+            width: 50%;
+            /* 画像をさらに小さく */
+            margin-top: 10px;
+        }
+
+        .left .social-links {
+            margin-top: 20px;
+            display: flex;
+            /* 横並びに変更 */
+            gap: 10px;
+        }
+
+        .left .social-links a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            color: black;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            /* ホバー用 */
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+
+        .left .social-links a:hover {
+            background: #555;
+            color: white;
+        }
+
+        .left .image-container {
+            margin-top: auto;
+            height: 50%;
+            /* 親要素の高さを固定 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .left .image-container img {
+            max-height: 100%;
+            max-width: 100%;
+            min-width: 200px;
+            /* 最小サイズを指定 */
+            object-fit: contain;
+            /* 比率を保ったまま表示 */
+        }
+
+        /* 右セクション */
+        .right {
+            width: 60%;
+            /* 右セクション6割 */
+            background: white;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+            /* デフォルトは非表示 */
+        }
+
+        .section.active {
+            display: block;
+            /* アクティブなセクションを表示 */
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            /* テキストを少し小さめに */
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        canvas {
+  width: 400px;
+}
+
+#live2d_canvasの幅全体に表示
+canvas {
+  width: 100%;
+}
+
+
+        /* スマホ用レイアウト */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .left {
+                display: none;
+                /* 左セクションを非表示 */
+            }
+
+            .right {
+                width: 100%;
+                /* 右セクションを全幅 */
+                padding: 10px;
+            }
+
+            .right header {
+                display: block;
+                /* スマホ表示時にヘッダーを有効化 */
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .right header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .right header {
+                display: none;
+                /* PC表示時はヘッダーを非表示 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 左セクション -->
+    <div class="left">
+        <h1>現世</h1>
+        <p>UTSY</p>
+        <nav>
+            <a href="#" data-section="about">ABOUT</a>
+            <a href="#" data-section="pic">PIC</a>
+        </nav>
+        <div class="social-links">
+            <a href="https://twitter.com/utsy_m">X</a>
+            <a href="https://www.pixiv.net/users/10369216">pixiv</a>
+            <a href="https://odaibako.net/u/UTSY_M">お題箱</a>
+        </div>
+        <div class="image-container">
+            <canvas></canvas>
+        </div>
+
+    </div>
+
+    <!-- 右セクション -->
+    <div class="right">
+        <header>
+            <h1>現世</h1>
+            <p>UTSY</p>
+        </header>
+        <div id="about" class="section active">
+            <h2>ABOUT</h2>
+            <p>ここはABOUTのセクションです。</p>
+        </div>
+        <div id="pic" class="section">
+            <h2>PIC</h2>
+            <p>ここはPICのセクションです。</p>
+        </div>
+    </div>
+
+
+
+    <script>
+
+
+        // ナビゲーションをクリックすると右セクションの内容を切り替え
+        const links = document.querySelectorAll(".left nav a");
+        const sections = document.querySelectorAll(".section");
+
+        links.forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                // 全セクションを非表示に
+                sections.forEach(section => section.classList.remove("active"));
+
+                // クリックされたリンクに対応するセクションを表示
+                const targetId = link.getAttribute("data-section");
+                document.getElementById(targetId).classList.add("active");
+            });
+        });
+
+    </script>
+</body>
+
+</html>
